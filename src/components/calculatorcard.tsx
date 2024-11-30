@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import MoneyInput from "@/components/moneyinput"
 import { ChangeEvent, useEffect, useState } from "react";
-import { BASE_CPP_RATE, BC_TAX_BRACKETS, CANADA_TAX_BRACKETS, CPP_RATE, EI_RATE, ENHANCED_CPP_RATE, MAX_CPP_CONTRIBUTORY_EARNINGS, MAX_EI_CONTRIBUTORY_EARNINGS } from "@/lib/utils";
+import { BASE_CPP_RATE, BC_TAX_BRACKETS, BC_TAX_CREDIT_BASE_AMOUNT, CANADA_TAX_BRACKETS, CANADA_TAX_CREDIT_BASE_AMOUNT, EI_RATE, ENHANCED_CPP_RATE, MAX_CPP_CONTRIBUTORY_EARNINGS, MAX_EI_CONTRIBUTORY_EARNINGS } from "@/lib/utils";
 
 function CalculatorCard() {
   const [employmentIncome, setEmploymentIncome] = useState(0);
@@ -75,10 +75,10 @@ function CalculatorCard() {
     let bcTaxes = 0
 
     let totalTaxableIncomeCanada = totalTaxableIncome - cppEnhancedDeduction
-    let canadaRefundableTaxCredits = (15000 + cppBaseTaxCredit + ei + (Math.min((employmentIncome + otherIncome), 1368))) * 0.15
+    let canadaRefundableTaxCredits = (CANADA_TAX_CREDIT_BASE_AMOUNT + cppBaseTaxCredit + ei + (Math.min((employmentIncome + otherIncome), 1368))) * 0.15
 
     let totalTaxableIncomeBC = totalTaxableIncome - cppEnhancedDeduction
-    let bcNonRefundableTaxCredits = (11981 + cppBaseTaxCredit + ei) * 0.0506
+    let bcNonRefundableTaxCredits = (BC_TAX_CREDIT_BASE_AMOUNT + cppBaseTaxCredit + ei) * 0.0506
 
     CANADA_TAX_BRACKETS.forEach(bracket => {
       let amountForBracket = bracket.max - bracket.min;

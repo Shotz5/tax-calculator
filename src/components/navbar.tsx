@@ -21,7 +21,7 @@ function Navbar() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
-              <Link to="/test">
+              <Link to="/bc">
                 British Columbia
               </Link>
             </NavigationMenuLink>
